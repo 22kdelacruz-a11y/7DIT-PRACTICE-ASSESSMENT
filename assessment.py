@@ -1,7 +1,8 @@
 student_info = {'001' : ["Kian Dela Cruz", 17, 11, 50, 25, 25],
             '002' : ["Nhico Bigcas", 16, 11, 25, 50, 25],
             '003' : ["Justin Pelayo", 16, 12, 25, 50, 50],
-            '004' : ["Mishael Masiglat", 18, 12, 50, 50, 50]}
+            '004' : ["Mishael Masiglat", 18, 12, 50, 50, 50],
+            '005' : ["Dylan Arps", 16, 12 , 0, 0, 0]}
 
 def display_menu():
     print("What would you like to do?")
@@ -18,6 +19,20 @@ def get_int(prompt):
         try:
             num = int(input(prompt))
             return num
+        except ValueError:
+            print("That is not a valid integer, try again.")
+
+def get_cred(prompt):
+    while True:
+        try: 
+            cred = int(input(prompt))
+            if cred > 14: 
+                print("Number must be below 14")
+            elif cred <= 0:
+                print("Number must be above 0")    
+            else:
+                return cred
+                break
         except ValueError:
             print("That is not a valid integer, try again.")
 
@@ -55,14 +70,14 @@ def add_cred(student_info, get_int):
     while True:
         print("-----")
         identification = input("From what ID do you want to add to: ")
-        cred = get_int("How many credits do you want to add?: ")
-        level = input("What level: ").lower()
+        credits = get_cred("How many credits do you want to add: ")
+        level = input("What level: ").lower()   
         if level == "achieved":
-            student_info[identification][3] += cred
+            student_info[identification][3] += credits
         elif level == "merit":
-            student_info[identification][4] += cred
+            student_info[identification][4] += credits
         elif level == "excellence":
-            student_info[identification][5] += cred
+            student_info[identification][5] += credits
         else:
             print("Invalid level, please input Achieved, Merit, or Excellence")
             print("Try again")
