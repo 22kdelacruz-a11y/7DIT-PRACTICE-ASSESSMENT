@@ -10,9 +10,16 @@ def display_menu():
     print("3. View endorsements.")
     print("4. View a year level.")
     print("5. Add credits.")
-    print("6. Add students.")
-    print("7. View summary.")
-    print("8. End program")
+    print("6. View summary.")
+    print("7. End program")
+
+def get_int(prompt):
+    while True:
+        try:
+            num = int(input(prompt))
+            return num
+        except ValueError:
+            print("That is not a valid integer, try again.")
 
 def view_data():
     for stu in student_info:
@@ -33,14 +40,6 @@ def view_endorsements():
             print("Endorsement: Excellence")
         print("-----")
 
-def get_int(prompt):
-    while True:
-        try:
-            num = int(input(prompt))
-            return num
-        except ValueError:
-            print("That is not a valid integer, try again.")
-
 def student_year(student_info):
     year = get_int("From what year do you want to see?: ")
     print()
@@ -48,6 +47,8 @@ def student_year(student_info):
     for stu in student_info:
         if student_info[stu][2] == year:
             print(f"Name: {student_info[stu][0]} Age: {student_info[stu][1]} Year: {student_info[stu][2]}")
+    if student_info[stu][2] != year:
+        print("No students in that year level, try again.")
     print("-----")
 
 def add_cred(student_info, get_int):
@@ -104,14 +105,12 @@ while True:
     elif choice == "4":
         student_year(student_info)
     elif choice == "5":
-        add_cred(student_info, get_int)
+        add_cred(student_info, get_int)    
     elif choice == "6":
-        pass
-    elif choice == "7":
         print("---")
         view_summary()
         print("---")
-    elif choice == "8":
+    elif choice == "7":
         print("Thanks see you next time")
         break 
     else: 
