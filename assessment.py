@@ -2,7 +2,8 @@ student_info = {'001' : ["Kian Dela Cruz", 17, 11, 50, 25, 25],
             '002' : ["Nhico Bigcas", 16, 11, 25, 50, 25],
             '003' : ["Justin Pelayo", 16, 12, 25, 50, 50],
             '004' : ["Mishael Masiglat", 18, 12, 50, 50, 50],
-            '005' : ["Dylan Arps", 16, 12 , 0, 0, 0]}
+            '005' : ["Dylan Arps", 16, 13 , 0, 0, 0],
+            '006' : ["RF Decena", 18, 13 , 25, 0, 50]}
 
 def display_menu():
     print("What would you like to do?")
@@ -12,8 +13,8 @@ def display_menu():
     print("4. View a year level.")
     print("5. Add credits.")
     print("6. View summary.")
-    print("7. End program")
-
+    print("7. Passed students")
+    print("8. End program")
 def get_int(prompt):
     while True:
         try:
@@ -42,11 +43,11 @@ def view_data():
 
 def view_credits():
     for stu in student_info:
-        print(f"ID: {(stu)} Achieved: {student_info[stu][3]} Merit: {student_info[stu][4]} Excellence: {student_info[stu][5]}")
+        print(f"Name: {student_info[stu][0]} ID: {(stu)} Achieved: {student_info[stu][3]} Merit: {student_info[stu][4]} Excellence: {student_info[stu][5]}")
 
 def view_endorsements():
     for stu in student_info:
-        print(f"ID: {(stu)}")
+        print(f"Name: {student_info[stu][0]} ID: {(stu)}")
         if student_info[stu][3] >= 50:
             print("Endorsement: Achieved")
         if student_info[stu][4] >=50:
@@ -62,8 +63,6 @@ def student_year(student_info):
     for stu in student_info:
         if student_info[stu][2] == year:
             print(f"Name: {student_info[stu][0]} Age: {student_info[stu][1]} Year: {student_info[stu][2]}")
-    if student_info[stu][2] != year:
-        print("No students in that year level, try again.")
     print("-----")
 
 def add_cred(student_info, get_int):
@@ -125,7 +124,12 @@ while True:
         print("---")
         view_summary()
         print("---")
-    elif choice == "7":
+    elif choice == '7':
+        print("Students who have passed NCEA:")
+        for stu in student_info.values():
+            if sum(stu[3:]) >= 80:
+                print(f"{stu[0]} Year: {stu[2]}")
+    elif choice == "8":
         print("Thanks see you next time")
         break 
     else: 
